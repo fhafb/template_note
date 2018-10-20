@@ -1,0 +1,135 @@
+$color_afbgreen: #9FC418;
+$color_afbsemigreen: #D9E8A3;
+$color_afbdarkgreen: #A1C51B;
+$color_afblightgreen: #E9F1DA;
+$color_afbdarkblue: #08508A;
+$color_afblightblue: #199FD9;
+$palettea: $color_afbdarkgreen;
+$paletteb: $color_afbdarkblue;
+$palettec: #666;
+$palette_bgla: $color_afblightgreen;
+
+body {
+	font-family: sans-serif;
+	counter-reset: h2counter;
+	//width: 52em;
+	//margin: 0 auto;
+	margin: 0.2em;
+}
+
+header {
+	border-width: 0 0 0.8em 0;
+	border-style: solid;
+	border-image: linear-gradient(to right,$color_afbdarkblue,$color_afbgreen,$color_afblightblue) 1 0;
+
+	img {
+		width: 14em;
+		height: 5em;
+	}
+
+	table {
+		margin: 2em 0;
+		border-collapse: collapse;
+		width: 100%;
+
+		td {
+			border: 1px solid $palettec;
+			padding: 0.2em;
+			vertical-align: middle;
+
+			&:first-child {
+				width: 10em;
+			}
+		}
+	}
+}
+
+p {
+	margin: 1em 0 0 0;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+h1 {
+	font-size: 1.4em;
+	font-weight: bold;
+	margin: 0;
+}
+
+h2 {
+	margin-top: 2em;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: $color_afbdarkgreen;
+	border-bottom: 1px solid $color_afbdarkgreen;
+	counter-reset: h3counter;
+
+	&::before {
+		counter-increment: h2counter;
+		content: counter(h2counter) ". ";
+	}
+}
+
+h3 {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-top: 2em;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&::before {
+		counter-increment: h3counter;
+		content: counter(h2counter) "." counter(h3counter,upper-latin) ". ";
+	}
+}
+
+ul {
+	margin: 0.2em 0;
+	padding-inline-start: 2.2em;
+
+	& > li {
+		list-style-type: none;
+		padding-left: 0.4em;
+		text-indent: -0.7em;
+		line-height: 1;
+		
+		&::before {
+			content: "• ";
+			font-size: 200%;
+			color: $color_afbdarkgreen;
+			display: inline-block;
+			vertical-align: -0.1em;
+		}
+
+		li {
+			font-size: 0.9em;
+			text-indent: -0.8em;
+			padding-left: 1em;
+			padding-bottom: 1.25vh;
+
+			&::before {
+				font-size: 1em;
+				content: "✗ ";
+			}
+		}
+	}
+}
+
+.important {
+	border: 1px solid;
+	margin: 1em;
+	padding: 0.5em;
+	box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
+}
+
+@media print{
+	body {
+		font-family: serif;
+		font-size: 12pt;
+		text-align: justify;
+	}
+}
