@@ -1,17 +1,9 @@
-$color_afbgreen: #9FC418;
-$color_afbsemigreen: #D9E8A3;
-$color_afbdarkgreen: #A1C51B;
-$color_afblightgreen: #E9F1DA;
-$color_afbdarkblue: #08508A;
-$color_afblightblue: #199FD9;
-$palettea: $color_afbdarkgreen;
-$paletteb: $color_afbdarkblue;
-$palettec: #666;
-$palette_bgla: $color_afblightgreen;
+@import "colors";
 
 body {
 	font-family: sans-serif;
 	counter-reset: h2counter;
+	counter-reset: footnotes;
 	//width: 52em;
 	//margin: 0 auto;
 	margin: 0.2em;
@@ -38,7 +30,7 @@ header {
 			vertical-align: middle;
 
 			&:first-child {
-				width: 10em;
+				width: 8em;
 			}
 		}
 	}
@@ -126,10 +118,71 @@ ul {
 	box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
 }
 
+
+// Footnotes
+a[aria-describedby="footnote-label"] {
+	counter-increment: footnotes;
+	text-decoration: none;
+	color: inherit;
+	cursor: default;
+	outline: none;
+
+	&::after {
+		content: "[" counter(footnotes) "]";
+		vertical-align: super;
+		font-size: 0.6em;
+		margin-left: 0.1em;
+		color: blue;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+footer {
+	h2 {
+		display: none;
+	}
+
+	border-top: 1px solid black;
+	margin-top: 2em;
+	font-size: 0.8em;
+	
+	:target {
+		background: yellow;
+	}
+}
+
+table {
+	margin: 1em auto;
+	border-collapse: collapse;
+
+	th,td {
+		border: 1px solid black;
+		vertical-align: middle;
+		padding: 0.2em;
+	}
+	
+	th {
+		background-color: $color_afbdarkgreen;
+		color: white;
+		font-weight: bold;
+	}
+}
+
+// Print media
 @media print{
 	body {
 		font-family: serif;
-		font-size: 12pt;
+		font-size: 10pt;
 		text-align: justify;
+	}
+
+	a[aria-describedby="footnote-label"]::after {
+		color: inherit;
+		text-decoration: inherit;
+	}
+
+	footer [aria-label] {
+		display: none;
 	}
 }
